@@ -1,24 +1,11 @@
 'use client'
 
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import RecipesList from '../Components/RecipesList/RecipesList';
+import { RecipeContext } from '../Contexts/RecipeContext/RecipeContext';
 
 const RecipesPage = () => {
-    const [recipes, setRecipes] = useState([]);
-
-    useEffect(() => {
-        const fetchRecipeTitles = async () => {
-            try {
-                const response = await axios.get('/api/recipes');
-                setRecipes(response.data.recipes);
-            } catch (error) {
-                console.error('Error fetching recipe titles:', error);
-            }
-        };
-
-        fetchRecipeTitles();
-    }, []);
+    const {recipes} = useContext(RecipeContext);
 
     return (
         <>

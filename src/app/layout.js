@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './Components/Header/Header'
+import RecipeProvider from './Contexts/RecipeContext/RecipeContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,7 +15,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className='flex min-h-screen w-full lg:w-4/5 mx-auto flex-col p-6 gap-8 lg:gap-12'>
         <Header />
-        {children}
+        <RecipeProvider>
+          {children}
+        </RecipeProvider>
       </body>
     </html>
   )
