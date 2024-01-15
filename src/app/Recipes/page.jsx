@@ -5,12 +5,12 @@ import RecipesList from '../Components/RecipesList/RecipesList';
 import { RecipeContext } from '../Contexts/RecipeContext/RecipeContext';
 
 const RecipesPage = () => {
-    const {recipes} = useContext(RecipeContext);
+    const {recipes, setRecipes} = useContext(RecipeContext);
 
     return (
         <>
             <div>
-                <RecipesList recipes={recipes} />
+                <RecipesList recipes={recipes} setRecipes={setRecipes} />
             </div>
         </>
     );

@@ -21,7 +21,7 @@ const RecipeProvider = ({children}) => {
     }, []);
 
     return (
-        <RecipeContext.Provider value={{ recipes }}>
+        <RecipeContext.Provider value={{ recipes, setRecipes }}>
             {children}
         </RecipeContext.Provider>
     );
