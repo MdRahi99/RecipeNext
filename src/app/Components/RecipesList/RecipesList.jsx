@@ -21,11 +21,11 @@ const RecipesList = ({ recipes }) => {
                 <div className='flex flex-col gap-4 bg-white py-2'>
                     {
                         recipes.map(recipe => {
-                            const { id, label } = recipe;
-                            return <Link href={`/Recipes/${id}`} className='hover hover:bg-orange-50 px-4 py-2 flex items-center justify-between'>
+                            const { id, title } = recipe;
+                            return <Link key={id} href={`/Recipes/${id}`} className='hover hover:bg-orange-50 px-4 py-2 flex items-center justify-between'>
                                 <div className='flex items-center gap-4 lg:gap-28'>
                                     <h1 className='font-bold text-lg w-16 font-mono'>{id}</h1>
-                                    <h1 className='font-bold text-lg font-mono'>{label}</h1>
+                                    <h1 className='font-bold text-lg font-mono'>{title}</h1>
                                 </div>
                                 <div className='flex items-center gap-4 lg:gap-52'>
                                     <h1 className='font-bold text-lg font-mono px-3'><FaEdit className='text-xl hover:text-sky-600 text-sky-400' /></h1>
