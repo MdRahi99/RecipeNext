@@ -1,8 +1,6 @@
 import Link from 'next/link';
-import {FaEdit} from '@react-icons/all-files/fa/FaEdit';
 import {MdDelete} from '@react-icons/all-files/md/MdDelete';
 import {CgMoreR} from '@react-icons/all-files/cg/CgMoreR';
-import axios from 'axios';
 import { useContext } from 'react';
 import { RecipeContext } from '@/app/Contexts/RecipeContext/RecipeContext';
 
@@ -20,7 +18,6 @@ const RecipesList = () => {
                     </div>
                     <div className='flex items-center gap-12 lg:gap-52'>
                         <h1 className='text-lg font-bold text-black'>View</h1>
-                        <h1 className='text-lg font-bold text-black'>Edit</h1>
                         <h1 className='text-lg font-bold text-black'>Delete</h1>
                     </div>
                 </div>
@@ -34,9 +31,8 @@ const RecipesList = () => {
                                     <Link href={`/Recipes/${id}`} className='font-bold text-lg hover:text-orange-500 font-mono'>{title}</Link>
                                 </div>
                                 <div className='flex items-center gap-12 lg:gap-52'>
-                                    <Link href={`/Recipes/${id}`} className='font-bold text-lg font-mono'><CgMoreR className='text-2xl text-sky-600 hover:text-sky-400 font-bold' /></Link>
-                                    <h1 className='font-bold text-lg font-mono px-3'><FaEdit className='text-2xl hover:text-sky-600 text-sky-400' /></h1>
-                                    <button  onClick={() => handleDeleteClick(id)} className='font-bold text-lg font-mono px-3'><MdDelete className='text-2xl hover:text-orange-400 text-orange-600' /></button>
+                                    <Link href={`/Recipes/${id}`} className='font-bold text-lg font-mono pr-1'><CgMoreR className='text-2xl text-sky-600 hover:text-sky-400 font-bold' /></Link>
+                                    <button  onClick={() => handleDeleteClick(id)} className='font-bold text-lg font-mono px-4'><MdDelete className='text-2xl hover:text-orange-400 text-orange-600' /></button>
                                 </div>
                             </div>
                         })

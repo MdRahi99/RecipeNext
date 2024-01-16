@@ -53,6 +53,21 @@ const RecipeProvider = ({ children }) => {
         }
     };
 
+    const updateItem = async (id, updatedRecipe) => {
+        try {
+            const response = await axios.put(`/api/recipes/${id}`, updatedRecipe);
+            if (response.data.message === 'Success') {
+                setRecipes((prevRecipes) =>
+                    prevRecipes.map((recipe) => (recipe.id === id ? response.data : recipe))
+                );
+            } else {
+                console.error('Update recipe failed:', response.data.error);
+            }
+        } catch (error) {
+            console.error('Error updating recipe:', error);
+        }
+    };
+
     const handleDeleteClick = async (id) => {
         try {
             const response = await axios.delete(`/api/recipes/${id}`);
@@ -69,7 +84,7 @@ const RecipeProvider = ({ children }) => {
     };
 
     return (
-        <RecipeContext.Provider value={{ recipes, setRecipes, addNewItem, loading, handleDeleteClick, ingredientsData }}>
+        <RecipeContext.Provider value={{ recipes, setRecipes, addNewItem, updateItem, loading, handleDeleteClick, ingredientsData }}>
             {children}
         </RecipeContext.Provider>
     );

@@ -3,7 +3,7 @@
 import { RecipeContext } from "@/app/Contexts/RecipeContext/RecipeContext";
 import { useContext } from "react";
 
-const AddRecipe = ({ showModal, closeModal, register, handleSubmit, onSubmit, errors }) => {
+const AddRecipe = ({ title, showModal, closeModal, register, handleSubmit, onSubmit, errors, recipe }) => {
 
   const { ingredientsData } = useContext(RecipeContext);
 
@@ -11,14 +11,15 @@ const AddRecipe = ({ showModal, closeModal, register, handleSubmit, onSubmit, er
     <>
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white w-5/6 lg:w-1/3 h-fit px-8 py-4 rounded-xl">
-            <h2 className="text-2xl font-bold text-center border-b-2 border-black p-2 mb-6">Add New Recipe</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3 lg:gap-6'>
+          <div className="bg-white w-5/6 lg:w-2/5 h-fit px-8 py-4 rounded-xl">
+            <h2 className="text-2xl font-bold text-center border-b-2 border-black p-2 mb-6">{title}</h2>
+            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3 lg:gap-4'>
               <div>
                 <h1 className="font-semibold text-lg mb-1">Recipe Name</h1>
                 <input
                   type="text"
                   name="title"
+                  defaultValue={recipe ? recipe.title : ''}
                   placeholder="Enter recipe name here"
                   className={`input input-bordered w-full mx-auto rounded-lg focus:outline-none ${errors.title ? 'border-red-500 focus:border-red-500' : ''
                     }`}
@@ -53,6 +54,7 @@ const AddRecipe = ({ showModal, closeModal, register, handleSubmit, onSubmit, er
                 <h1 className="font-semibold text-lg mb-1">Recipe Instructions</h1>
                 <textarea
                   name="instructions"
+                  defaultValue={recipe ? recipe?.instructions : ''}
                   className={`textarea textarea-bordered w-full mx-auto rounded-lg focus:outline-none ${errors.instructions ? 'border-red-500 focus:border-red-500' : ''
                     }`}
                   placeholder="Enter recipe instructions here"
@@ -66,6 +68,7 @@ const AddRecipe = ({ showModal, closeModal, register, handleSubmit, onSubmit, er
                 <input
                   type="text"
                   name="imageURL"
+                  defaultValue={recipe ? recipe?.imageURL : '' }
                   placeholder="Enter recipe image url here"
                   className={`input input-bordered w-full mx-auto rounded-lg focus:outline-none`}
                   {...register("imageURL")}

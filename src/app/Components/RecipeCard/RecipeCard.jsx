@@ -15,7 +15,7 @@ const RecipeCard = ({ ingredientsArray, recipe, loading }) => {
                 <div className="lg:w-1/2">
                     {imageURL ?
                         <Image
-                            className="h-96 w-full"
+                            className="h-fit w-full"
                             src={imageURL}
                             alt="Description of the image"
                             width={500}

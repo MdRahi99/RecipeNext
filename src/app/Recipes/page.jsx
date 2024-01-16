@@ -25,7 +25,7 @@ const RecipesPage = () => {
         const formattedIngredients = Array.isArray(data.ingredients)
             ? data.ingredients.join(', ')
             : data.ingredients;
-        await addNewItem({...data, ingredients: formattedIngredients});
+        await addNewItem({ ...data, ingredients: formattedIngredients });
         reset();
         closeModal()
     }
@@ -33,6 +33,8 @@ const RecipesPage = () => {
     if (loading) {
         return <Loader />
     }
+
+    const title = 'Add New Recipe'
 
     return (
         <>
@@ -43,6 +45,7 @@ const RecipesPage = () => {
                     </button>
                 </div>
                 <AddRecipe
+                    title={title}
                     showModal={showModal}
                     closeModal={closeModal}
                     onSubmit={onSubmit}
