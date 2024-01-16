@@ -1,20 +1,37 @@
 import Image from "next/image";
+import Loader from "../Loader/Loader";
 
-const RecipeCard = ({ingredientsArray, recipe}) => {
+const RecipeCard = ({ ingredientsArray, recipe, loading }) => {
 
     const { imageURL, instructions, title } = recipe;
+
+    if (loading) {
+        return <Loader />
+    }
 
     return (
         <>
             <div className="flex flex-col lg:flex-row h-fit">
                 <div className="lg:w-1/2">
-                    <Image
-                        className="h-96 w-full"
-                        src={imageURL}
-                        alt="Description of the image"
-                        width={500}
-                        height={300}
-                    />
+                    {imageURL ?
+                        <Image
+                            className="h-96 w-full"
+                            src={imageURL}
+                            alt="Description of the image"
+                            width={500}
+                            height={300}
+                            priority
+                        />
+                        :
+                        <Image
+                            className="h-96 w-full"
+                            src='http://surl.li/pizdg'
+                            alt="Description of the image"
+                            width={500}
+                            height={300}
+                            priority
+                        />
+                    }
                 </div>
                 <div className="flex flex-col gap-8 bg-orange-50 p-6 lg:w-1/2 max-h-fit">
                     <h1 className="text-2xl font-serif uppercase px-3 py-1 shadow-2xl shadow-orange-400 text-center font-bold">{title}</h1>

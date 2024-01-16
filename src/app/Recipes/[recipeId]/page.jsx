@@ -11,18 +11,22 @@ const RecipeDetails = ({ params }) => {
     const [recipe, setRecipe] = useState([]);
     const { recipes } = useContext(RecipeContext);
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
                 const response = await axios.get(`/api/recipes/${params.recipeId}`);
                 setRecipe(response.data.recipe);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching recipe:', error);
+                setLoading(false);
             }
         };
 
         fetchRecipe();
-    }, []);
+    }, [params.recipeId]);
 
     const { ingredients } = recipe;
 
@@ -36,7 +40,7 @@ const RecipeDetails = ({ params }) => {
         <>
             <div className="flex flex-col-reverse lg:flex-row justify-between divide-y-4 divide-y-reverse lg:divide-y-0 lg:divide-x-4 divide-orange-200 w-full gap-4">
                 <div className="w-full lg:w-8/12">
-                    <RecipeCard ingredientsArray={ingredientsArray} recipe={recipe} />
+                    <RecipeCard ingredientsArray={ingredientsArray} recipe={recipe} loading={loading} />
                     <Link href='/' className="px-4 py-2 bg-orange-400 text-white font-bold text-xl w-full hover:bg-orange-300 flex justify-center text-center">Back</Link>
                 </div>
                 <div className="flex flex-row lg:flex-col gap-4 lg:w-4/12 p-4">

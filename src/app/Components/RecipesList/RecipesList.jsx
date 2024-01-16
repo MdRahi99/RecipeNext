@@ -1,25 +1,14 @@
 import Link from 'next/link';
 import {FaEdit} from '@react-icons/all-files/fa/FaEdit';
 import {MdDelete} from '@react-icons/all-files/md/MdDelete';
-import {GrFormView} from '@react-icons/all-files/gr/GrFormView';
+import {CgMoreR} from '@react-icons/all-files/cg/CgMoreR';
 import axios from 'axios';
+import { useContext } from 'react';
+import { RecipeContext } from '@/app/Contexts/RecipeContext/RecipeContext';
 
-const RecipesList = ({ recipes, setRecipes }) => {
+const RecipesList = () => {
 
-    const handleDeleteClick = async (id) => {
-        try {
-            const response = await axios.delete(`/api/recipes/${id}`);
-            if (response.data.message === 'Success') {
-                setRecipes((prevRecipes) =>
-                    prevRecipes.filter((recipe) => recipe.id !== id)
-                );
-            } else {
-                console.error('Delete recipe failed:', response.data.error);
-            }
-        } catch (error) {
-            console.error('Error deleting recipe:', error);
-        }
-    };
+    const {recipes, handleDeleteClick} = useContext(RecipeContext);
 
     return (
         <>
@@ -29,7 +18,7 @@ const RecipesList = ({ recipes, setRecipes }) => {
                         <h1 className='text-lg font-bold text-black w-16'>#</h1>
                         <h1 className='text-lg font-bold text-black'>Name</h1>
                     </div>
-                    <div className='flex items-center gap-4 lg:gap-52'>
+                    <div className='flex items-center gap-12 lg:gap-52'>
                         <h1 className='text-lg font-bold text-black'>View</h1>
                         <h1 className='text-lg font-bold text-black'>Edit</h1>
                         <h1 className='text-lg font-bold text-black'>Delete</h1>
@@ -39,15 +28,15 @@ const RecipesList = ({ recipes, setRecipes }) => {
                     {
                         recipes.map(recipe => {
                             const { id, title } = recipe;
-                            return <div key={id} className='hover hover:bg-orange-50 px-4 py-2 flex items-center justify-between'>
+                            return <div key={id} className='hover px-4 py-2 flex items-center justify-between'>
                                 <div className='flex items-center gap-4 lg:gap-28'>
                                     <h1 className='font-bold text-lg w-16 font-mono'>{id}</h1>
-                                    <h1 className='font-bold text-lg font-mono'>{title}</h1>
+                                    <Link href={`/Recipes/${id}`} className='font-bold text-lg hover:text-orange-500 font-mono'>{title}</Link>
                                 </div>
-                                <div className='flex items-center gap-4 lg:gap-52'>
-                                    <Link href={`/Recipes/${id}`} className='font-bold text-lg font-mono px-3'><GrFormView className='text-3xl' /></Link>
-                                    <h1 className='font-bold text-lg font-mono px-3'><FaEdit className='text-xl hover:text-sky-600 text-sky-400' /></h1>
-                                    <button  onClick={() => handleDeleteClick(id)} className='font-bold text-lg font-mono px-3'><MdDelete className='text-xl hover:text-orange-400 text-orange-600' /></button>
+                                <div className='flex items-center gap-12 lg:gap-52'>
+                                    <Link href={`/Recipes/${id}`} className='font-bold text-lg font-mono'><CgMoreR className='text-2xl text-sky-600 hover:text-sky-400 font-bold' /></Link>
+                                    <h1 className='font-bold text-lg font-mono px-3'><FaEdit className='text-2xl hover:text-sky-600 text-sky-400' /></h1>
+                                    <button  onClick={() => handleDeleteClick(id)} className='font-bold text-lg font-mono px-3'><MdDelete className='text-2xl hover:text-orange-400 text-orange-600' /></button>
                                 </div>
                             </div>
                         })
