@@ -1,7 +1,7 @@
 'use client'
 
 import { RecipeContext } from "@/app/Contexts/RecipeContext/RecipeContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 const AddRecipe = ({ showModal, closeModal, register, handleSubmit, onSubmit, errors }) => {
 
@@ -29,15 +29,25 @@ const AddRecipe = ({ showModal, closeModal, register, handleSubmit, onSubmit, er
 
               <div>
                 <h1 className="font-semibold text-lg">Recipe Ingredients</h1>
-                <input
-                  type="text"
-                  name="ingredients"
-                  placeholder="Enter recipe name here"
-                  className={`input input-bordered w-full mx-auto rounded-lg focus:outline-none ${errors.ingredients ? 'border-red-500 focus:border-red-500' : ''
-                    }`}
-                  {...register("ingredients", { required: 'Recipe ingredients is required'})}
-                />
-                {errors.ingredients && <span className="text-red-500">{errors.ingredients.message}</span>}
+                <div className="lex flex-col overflow-y-auto h-24 mt-4">
+                  {ingredientsData.map((ingredient) => (
+                    <div key={ingredient.id} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id={`${ingredient.id}`}
+                        value={ingredient.label}
+                        {...register("ingredients", {
+                          required: 'Select at least three ingredients',
+                          validate: (value) => value.length >= 3,
+                        })}
+                      />
+                      <label htmlFor={`${ingredient.id}`} className="ml-2">
+                        {ingredient.label}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                {errors.ingredients && <span className="text-red-500 mt-2">{errors.ingredients.message}</span>}
               </div>
 
               <div>

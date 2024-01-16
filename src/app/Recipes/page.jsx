@@ -22,12 +22,15 @@ const RecipesPage = () => {
     };
 
     const onSubmit = async (data) => {
-        await addNewItem(data);
+        const formattedIngredients = Array.isArray(data.ingredients)
+            ? data.ingredients.join(', ')
+            : data.ingredients;
+        await addNewItem({...data, ingredients: formattedIngredients});
         reset();
         closeModal()
     }
 
-    if(loading){
+    if (loading) {
         return <Loader />
     }
 
@@ -40,19 +43,19 @@ const RecipesPage = () => {
                     </button>
                 </div>
                 <AddRecipe
-                showModal={showModal}
-                closeModal={closeModal}
-                onSubmit={onSubmit}
-                register={register}
-                handleSubmit={handleSubmit}
-                errors={errors} />
+                    showModal={showModal}
+                    closeModal={closeModal}
+                    onSubmit={onSubmit}
+                    register={register}
+                    handleSubmit={handleSubmit}
+                    errors={errors} />
                 {
                     recipes.length > 0 ?
-                    <RecipesList />
-                    :
-                    <div className='text-2xl font-bold text-center p-12 uppercase bg-orange-100 my-10 lg:my-20'>
-                        <h1>No Recipes Found!!!</h1>
-                    </div>
+                        <RecipesList />
+                        :
+                        <div className='text-2xl font-bold text-center p-12 uppercase bg-orange-100 my-10 lg:my-20'>
+                            <h1>No Recipes Found!!!</h1>
+                        </div>
                 }
             </div>
         </>

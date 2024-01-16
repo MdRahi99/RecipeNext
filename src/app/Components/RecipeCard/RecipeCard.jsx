@@ -37,7 +37,7 @@ const RecipeCard = ({ ingredientsArray, recipe, loading }) => {
                     <h1 className="text-2xl font-serif uppercase px-3 py-1 shadow-2xl shadow-orange-400 text-center font-bold">{title}</h1>
                     <div>
                         <p className="text-xl font-semibold py-2 border-b-4 border-orange-300 mb-2 font-sans">Ingredients:</p>
-                        <ul className="grid grid-cols-3 gap-3">
+                        <ul className="grid grid-cols-2 gap-3">
                             {ingredientsArray.map((ingredient, index) => (
                                 <li
                                     key={index}
