@@ -28,26 +28,23 @@ const AddRecipe = ({ title, showModal, closeModal, register, handleSubmit, onSub
                 {errors.title && <span className="text-red-500">{errors.title.message}</span>}
               </div>
 
-              <div>
-                <h1 className="font-semibold text-lg">Recipe Ingredients</h1>
-                <div className="lex flex-col overflow-y-auto h-24 mt-4">
-                  {ingredientsData.map((ingredient) => (
-                    <div key={ingredient.id} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        id={`${ingredient.id}`}
-                        value={ingredient.label}
-                        {...register("ingredients", {
-                          required: 'Select at least one ingredients'
-                        })}
-                      />
-                      <label htmlFor={`${ingredient.id}`} className="ml-2">
-                        {ingredient.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-                {errors.ingredients && <span className="text-red-500 mt-2">{errors.ingredients.message}</span>}
+              <div className="lex flex-col overflow-y-auto h-24 mt-4">
+                {ingredientsData.map((ingredient) => (
+                  <div key={ingredient.id} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={`${ingredient.id}`}
+                      value={ingredient.label}
+                      defaultChecked={recipe && recipe.ingredients && recipe.ingredients.includes(ingredient.label)}
+                      {...register("ingredients", {
+                        required: 'Select at least one ingredient'
+                      })}
+                    />
+                    <label htmlFor={`${ingredient.id}`} className="ml-2">
+                      {ingredient.label}
+                    </label>
+                  </div>
+                ))}
               </div>
 
               <div>
@@ -68,7 +65,7 @@ const AddRecipe = ({ title, showModal, closeModal, register, handleSubmit, onSub
                 <input
                   type="text"
                   name="imageURL"
-                  defaultValue={recipe ? recipe?.imageURL : '' }
+                  defaultValue={recipe ? recipe?.imageURL : ''}
                   placeholder="Enter recipe image url here"
                   className={`input input-bordered w-full mx-auto rounded-lg focus:outline-none`}
                   {...register("imageURL")}
