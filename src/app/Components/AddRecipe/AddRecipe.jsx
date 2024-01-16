@@ -37,8 +37,7 @@ const AddRecipe = ({ showModal, closeModal, register, handleSubmit, onSubmit, er
                         id={`${ingredient.id}`}
                         value={ingredient.label}
                         {...register("ingredients", {
-                          required: 'Select at least three ingredients',
-                          validate: (value) => value.length >= 3,
+                          required: 'Select at least one ingredients'
                         })}
                       />
                       <label htmlFor={`${ingredient.id}`} className="ml-2">

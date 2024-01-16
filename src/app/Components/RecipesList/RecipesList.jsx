@@ -26,9 +26,9 @@ const RecipesList = () => {
                 </div>
                 <div className='flex flex-col gap-4 bg-white py-2'>
                     {
-                        recipes.map(recipe => {
+                        recipes.map((recipe, index) => {
                             const { id, title } = recipe;
-                            return <div key={id} className='hover px-4 py-2 flex items-center justify-between'>
+                            return <div key={index} className='hover px-4 py-2 flex items-center justify-between'>
                                 <div className='flex items-center gap-4 lg:gap-28'>
                                     <h1 className='font-bold text-lg w-16 font-mono'>{id}</h1>
                                     <Link href={`/Recipes/${id}`} className='font-bold text-lg hover:text-orange-500 font-mono'>{title}</Link>

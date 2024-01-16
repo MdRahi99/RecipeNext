@@ -48,10 +48,6 @@ const RecipeProvider = ({ children }) => {
             const response = await axios.post('/api/recipes', newRecipe);
 
             setRecipes((prevData) => [...prevData, response.data]);
-
-            reset();
-
-            onClose();
         } catch (error) {
             console.error('Error adding recipe:', error);
         }
