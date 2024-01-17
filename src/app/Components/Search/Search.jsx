@@ -1,9 +1,36 @@
-const Search = () => {
+const Search = ({ searchTerm, setSearchTerm, handleSearch, clearSearch }) => {
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     return (
         <>
-            <div className="flex items-center w-full lg:w-2/6">
-                <input type="text" placeholder="Search Here..." className="input focus:outline-none input-bordered border-dotted border-r-0 border-2 border-orange-400 focus:border-orange-400 rounded-none w-full h-9" />
-                <button className="text-lg px-3 bg-orange-500 hover:bg-orange-400 text-white py-1 lg:rounded-tr-2xl font-medium text-center font-serif">Search</button>
+            <div className="flex relative items-center w-full lg:w-2/6">
+                {searchTerm && (
+                    <button className='absolute left-0 top-10 uppercase text-xs bg-sky-500 text-white px-3 py-1 font-bold' onClick={clearSearch}>
+                        Clear
+                    </button>
+                )}
+                <input
+                    type="text"
+                    placeholder="Search Here..."
+                    className="input focus:outline-none input-bordered border-dotted border-r-0 border-2 border-orange-400 focus:border-orange-400 rounded-none w-full h-9"
+                    value={searchTerm}
+                    onChange={handleChange}
+                    onKeyPress={handleKeyPress}
+                />
+                <button
+                    className="text-lg px-3 bg-orange-500 hover:bg-orange-400 text-white py-1 lg:rounded-tr-2xl font-medium text-center font-serif"
+                    onClick={handleSearch}
+                >
+                    Search
+                </button>
             </div>
         </>
     );

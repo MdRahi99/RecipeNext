@@ -9,6 +9,9 @@ const RecipeProvider = ({ children }) => {
     const [ingredientsData, setIngredientsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [fetchingData, setFetchingData] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredRecipes, setFilteredRecipes] = useState([]);
+    const [clear, setClear] = useState(false);
 
     useEffect(() => {
         const fetchRecipe = async () => {
@@ -75,6 +78,10 @@ const RecipeProvider = ({ children }) => {
                 setRecipes((prevRecipes) =>
                     prevRecipes.filter((recipe) => recipe.id !== id)
                 );
+
+                setFilteredRecipes((prevFilteredRecipes) =>
+                    prevFilteredRecipes.filter((recipe) => recipe.id !== id)
+                );
             } else {
                 console.error('Delete recipe failed:', response.data.error);
             }
@@ -83,8 +90,23 @@ const RecipeProvider = ({ children }) => {
         }
     };
 
+    const handleSearch = () => {
+        const filteredRecipes = recipes.filter((recipe) =>
+            recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredRecipes(filteredRecipes);
+    };
+
+    const clearSearch = () => {
+        setClear(true);
+        if(clear){
+            setSearchTerm('');
+            setFilteredRecipes(recipes);
+        };
+    };
+
     return (
-        <RecipeContext.Provider value={{ recipes, setRecipes, addNewItem, updateItem, loading, handleDeleteClick, ingredientsData }}>
+        <RecipeContext.Provider value={{ recipes, setRecipes, addNewItem, updateItem, loading, handleDeleteClick, ingredientsData, searchTerm, setSearchTerm, handleSearch, filteredRecipes, clearSearch }}>
             {children}
         </RecipeContext.Provider>
     );
