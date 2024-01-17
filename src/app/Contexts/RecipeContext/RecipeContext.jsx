@@ -92,14 +92,16 @@ const RecipeProvider = ({ children }) => {
 
     const handleSearch = () => {
         const filteredRecipes = recipes.filter((recipe) =>
-            recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+            recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            recipe.ingredients.toLowerCase().includes(searchTerm.toLowerCase())
         );
+
         setFilteredRecipes(filteredRecipes);
     };
 
     const clearSearch = () => {
         setClear(true);
-        if(clear){
+        if (clear) {
             setSearchTerm('');
             setFilteredRecipes(recipes);
         };
