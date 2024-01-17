@@ -37,8 +37,12 @@ export const PUT = async (req, res) => {
 export const DELETE = async (req, res) => {
   try {
     const id = parseInt(req.url.split("/recipes/")[1], 10);
-    await main();
+
     await prisma.Recipe.delete({ where: { id } });
+    
+    await prisma.$executeRaw`DELETE FROM sqlite_sequence WHERE name = 'Recipe'`;
+    await prisma.$executeRaw`INSERT INTO sqlite_sequence (name, seq) VALUES ('Recipe', (SELECT COALESCE(MAX(id), 0) FROM "Recipe"))`;
+
     return NextResponse.json({ message: "Success" }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
