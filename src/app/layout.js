@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className='flex min-h-screen w-full lg:w-4/5 mx-auto flex-col p-6 gap-8 lg:gap-12'>
+      <body className='flex min-h-screen w-full lg:w-4/5 mx-auto flex-col p-6 gap-12 lg:gap-20'>
         <RecipeProvider>
           <Header />
           {children}

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { RecipeContext } from '@/app/Contexts/RecipeContext/RecipeContext';
 import ListData from './ListData';
 
-const RecipesList = () => {
+const RecipesList = ({startIndex, itemsPerPageDesktop, itemsPerPageMobile}) => {
 
     const { recipes, handleDeleteClick, filteredRecipes, loading } = useContext(RecipeContext);
 
@@ -21,13 +21,13 @@ const RecipesList = () => {
                 </div>
                 <div className='flex flex-col gap-4 bg-white py-2'>
                     {filteredRecipes.length > 0 ? (
-                        filteredRecipes.map((recipe, index) => {
+                        filteredRecipes.slice(startIndex, startIndex + (window.innerWidth >= 768 ? itemsPerPageDesktop : itemsPerPageMobile)).map((recipe, index) => {
                             return <ListData key={index} recipe={recipe}
                             handleDeleteClick={handleDeleteClick}
                             loading={loading} />
                         })
                     ) : (
-                        recipes.map((recipe, index) => {
+                        recipes.slice(startIndex, startIndex + (window.innerWidth >= 768 ? itemsPerPageDesktop : itemsPerPageMobile)).map((recipe, index) => {
                             return <ListData key={index} recipe={recipe}
                             handleDeleteClick={handleDeleteClick}
                             loading={loading} />

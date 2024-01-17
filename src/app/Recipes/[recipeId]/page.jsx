@@ -86,7 +86,7 @@ const RecipeDetails = ({ params }) => {
                     register={register}
                     handleSubmit={handleSubmit}
                     errors={errors} />
-                <div className="flex flex-row overflow-x-auto lg:flex-col gap-4 w-full lg:w-3/12 lg:pl-4 pb-3 lg:pb-0">
+                <div className="lg:flex hidden lg:flex-col gap-4 lg:w-3/12 lg:pl-4 pb-3 lg:pb-0">
                     <p className="lg:block hidden text-xl border-b-4 border-orange-300 mb-2 pb-1 font-bold font-sans">Other Recipes:</p>
                     {
                         recipes.map(recipe => {
