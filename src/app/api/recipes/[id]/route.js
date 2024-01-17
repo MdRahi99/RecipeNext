@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "../../../../../prisma";
 import { main } from "../route";
 
+// Get Specific Recipe Data Api
 export const GET = async (req, res) => {
   try {
     const id = parseInt(req.url.split("/recipes/")[1], 10);
@@ -17,6 +18,7 @@ export const GET = async (req, res) => {
   }
 };
 
+// Update Specific Recipe Data Api
 export const PUT = async (req, res) => {
   try {
     const id = parseInt(req.url.split("/recipes/")[1], 10);
@@ -34,6 +36,8 @@ export const PUT = async (req, res) => {
   }
 };
 
+
+// Delete Specific Recipe Data Api
 export const DELETE = async (req, res) => {
   try {
     const id = parseInt(req.url.split("/recipes/")[1], 10);

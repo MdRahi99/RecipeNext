@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 
 const RecipeDetails = ({ params }) => {
 
-    const {recipeId} = params;
+    const { recipeId } = params;
 
     const [recipe, setRecipe] = useState([]);
     const { recipes, updateItem } = useContext(RecipeContext);
@@ -48,16 +48,16 @@ const RecipeDetails = ({ params }) => {
         const formattedIngredients = Array.isArray(data.ingredients)
             ? data.ingredients.join(', ')
             : data.ingredients;
-    
+
         try {
             await updateItem(recipeId, { ...data, ingredients: formattedIngredients });
-            reset(); 
-            closeModal(); 
+            reset();
+            closeModal();
         } catch (error) {
             console.error('Error updating recipe:', error);
             console.error('Axios error details:', error.response);
         }
-    };    
+    };
 
     const hasCommas = ingredients && ingredients.includes(',');
 
@@ -70,7 +70,7 @@ const RecipeDetails = ({ params }) => {
     return (
         <>
             <div className="flex flex-col-reverse lg:flex-row justify-between divide-y-4 divide-y-reverse lg:divide-y-0 lg:divide-x-4 divide-orange-200 w-full gap-4">
-                <div className="w-full lg:w-10/12">
+                <div className="w-full lg:w-9/12">
                     <RecipeCard ingredientsArray={ingredientsArray} recipe={recipe} loading={loading} />
                     <div className="flex items-center justify-between mt-6 gap-4">
                         <Link href='/' className="px-4 py-2 bg-orange-400 text-white font-bold text-xl w-full hover:bg-orange-300 flex justify-center text-center">Back</Link>
@@ -86,7 +86,8 @@ const RecipeDetails = ({ params }) => {
                     register={register}
                     handleSubmit={handleSubmit}
                     errors={errors} />
-                <div className="flex flex-row lg:flex-col gap-4 lg:w-2/12 lg:pl-4 py-2">
+                <div className="flex flex-row overflow-x-auto lg:flex-col gap-4 w-full lg:w-3/12 lg:pl-4 pb-3 lg:pb-0">
+                    <p className="lg:block hidden text-xl border-b-4 border-orange-300 mb-2 pb-1 font-bold font-sans">Other Recipes:</p>
                     {
                         recipes.map(recipe => {
                             const { id, title } = recipe

@@ -1,6 +1,7 @@
 import prisma from "../../../../prisma";
 import { NextResponse } from "next/server";
 
+// DB Connection
 export async function main() {
   try {
     await prisma.$connect();
@@ -9,6 +10,7 @@ export async function main() {
   }
 }
 
+// Get All Recipes Data Api
 export const GET = async (req, res) => {
   try {
     await main();
@@ -21,6 +23,7 @@ export const GET = async (req, res) => {
   }
 };
 
+// Post Recipe Data Api
 export const POST = async (req, res) => {
   try {
     const { id, title, ingredients, instructions, imageURL } = await req.json();

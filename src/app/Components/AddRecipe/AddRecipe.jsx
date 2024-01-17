@@ -28,7 +28,7 @@ const AddRecipe = ({ title, showModal, closeModal, register, handleSubmit, onSub
                 {errors.title && <span className="text-red-500">{errors.title.message}</span>}
               </div>
 
-              <div className="lex flex-col overflow-y-auto h-24 mt-4">
+              <div className="flex flex-col overflow-y-auto h-24 mt-4">
                 {ingredientsData.map((ingredient) => (
                   <div key={ingredient.id} className="flex items-center">
                     <input
@@ -55,7 +55,7 @@ const AddRecipe = ({ title, showModal, closeModal, register, handleSubmit, onSub
                   className={`textarea textarea-bordered w-full mx-auto rounded-lg focus:outline-none ${errors.instructions ? 'border-red-500 focus:border-red-500' : ''
                     }`}
                   placeholder="Enter recipe instructions here"
-                  {...register("instructions", { required: 'Recipe instructions is required', maxLength: { value: 200, message: 'Recipe name must be at most 200 characters' } })} >
+                  {...register("instructions", { required: 'Recipe instructions is required', maxLength: { value: 1500, message: 'Recipe name must be at most 1500 characters' } })} >
                 </textarea>
                 {errors.instructions && <span className="text-red-500">{errors.instructions.message}</span>}
               </div>
